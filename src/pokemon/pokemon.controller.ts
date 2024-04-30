@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus } from '@nestjs/common';
 import { PokemonService } from './pokemon.service';
 import { CreatePokemonDto } from './dto/create-pokemon.dto';
 import { UpdatePokemonDto } from './dto/update-pokemon.dto';
@@ -6,31 +6,32 @@ import { UpdatePokemonDto } from './dto/update-pokemon.dto';
 @Controller('pokemon')
 
 export class PokemonController {
-  constructor(private readonly pokemonService: PokemonService) {}
+    constructor(private readonly pokemonService: PokemonService) { }
 
-  @Post()
-  create(@Body() createPokemonDto: CreatePokemonDto) {
+    @Post()
 
-    return this.pokemonService.create(createPokemonDto);
-  }
+    create(@Body() createPokemonDto: CreatePokemonDto) {
 
-  @Get()
-  findAll() {
-    return this.pokemonService.findAll();
-  }
+        return this.pokemonService.create(createPokemonDto);
+    }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.pokemonService.findOne(+id);
-  }
+    @Get()
+    findAll() {
+        return this.pokemonService.findAll();
+    }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePokemonDto: UpdatePokemonDto) {
-    return this.pokemonService.update(+id, updatePokemonDto);
-  }
+    @Get(':id')
+    findOne(@Param('id') id: string) {
+        return this.pokemonService.findOne(+id);
+    }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.pokemonService.remove(+id);
-  }
+    @Patch(':id')
+    update(@Param('id') id: string, @Body() updatePokemonDto: UpdatePokemonDto) {
+        return this.pokemonService.update(+id, updatePokemonDto);
+    }
+
+    @Delete(':id')
+    remove(@Param('id') id: string) {
+        return this.pokemonService.remove(+id);
+    }
 }
