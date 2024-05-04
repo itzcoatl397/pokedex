@@ -99,6 +99,25 @@ export class PokemonService {
    return;
     }
 
+  
+
+    async fillPokemonSeed(no,pokemonData){
+
+        this.findOne(no)
+
+
+        try {
+            const pokemon = await this.pokemonModel.create(pokemonData)
+            return pokemon;
+        } catch (error) {
+
+            this.handleExceptions(error)
+           
+            throw new InternalServerErrorException(`Can't create Pokemon - check servr logs`)
+        }
+
+    }
+
     private handleExceptions(error: any) {
         if (error.code === 11000) {
             throw new BadRequestException(`Pokemon  exist  in db ${JSON.stringify(error.keyValue)}`)
